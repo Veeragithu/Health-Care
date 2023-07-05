@@ -8,10 +8,8 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jakarta.persistence.CascadeType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -22,134 +20,151 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
+/**
+ * Represents a patient.
+ */
 @Entity
 public class Patient {
-	@Id
-	@Column(name = "patient_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
-	@NotBlank(message = "Name is required")
-	private String name;
+    @Id
+    @Column(name = "patient_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotBlank(message = "Date of Birth is required")
-	private String dateOfBirth;
+    @NotBlank(message = "Name is required")
+    private String name;
 
-	@NotBlank(message = "Gender is required")
-	private String gender;
+    @NotBlank(message = "Date of Birth is required")
+    private String dateOfBirth;
 
-	@ElementCollection
-	@OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL, orphanRemoval =false)
-	@JoinColumn(referencedColumnName = "patient_id", name = "patient_id")
-	private List<Address> addresses;
+    @NotBlank(message = "Gender is required")
+    private String gender;
 
-	@ElementCollection
-	@OneToMany(targetEntity = Telephone.class, cascade = CascadeType.ALL, orphanRemoval = false)
-	@JoinColumn(referencedColumnName = "patient_id", name = "patient_id")
-	@Pattern(regexp = "\\d{10}", message = "Invalid Telephone number")
-	private List<Telephone> telephoneNumbers;
+    @ElementCollection
+    @OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL, orphanRemoval = false)
+    @JoinColumn(referencedColumnName = "patient_id", name = "patient_id")
+    private List<Address> addresses;
 
-	@JsonCreator
-	public Patient(@JsonProperty("name") String name, @JsonProperty("dateOfBirth") String dateOfBirth,
-			@JsonProperty("gender") String gender, @JsonProperty("addresses") List<Address> addresses,
-			@JsonProperty("telephoneNumbers") List<Telephone> telephoneNumbers) {
-		this.name = name;
-		this.dateOfBirth = dateOfBirth;
-		this.gender = gender;
-		this.addresses = addresses;
-		this.telephoneNumbers = telephoneNumbers;
-	}
+    @ElementCollection
+    @OneToMany(targetEntity = Telephone.class, cascade = CascadeType.ALL, orphanRemoval = false)
+    @JoinColumn(referencedColumnName = "patient_id", name = "patient_id")
+    @Pattern(regexp = "\\d{10}", message = "Invalid Telephone number")
+    private List<Telephone> telephoneNumbers;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Default constructor for the Patient class.
+     */
+    public Patient() {
+        super();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Get the ID of the patient.
+     *
+     * @return The patient ID.
+     */
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Set the ID of the patient.
+     *
+     * @param id The patient ID to set.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Get the name of the patient.
+     *
+     * @return The patient name.
+     */
+    public String getName() {
+        return name;
+    }
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
+    /**
+     * Set the name of the patient.
+     *
+     * @param name The patient name to set.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    /**
+     * Get the date of birth of the patient.
+     *
+     * @return The patient's date of birth.
+     */
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    /**
+     * Set the date of birth of the patient.
+     *
+     * @param dateOfBirth The patient's date of birth to set.
+     */
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    /**
+     * Get the gender of the patient.
+     *
+     * @return The patient's gender.
+     */
+    public String getGender() {
+        return gender;
+    }
 
-	public List<Address> getAddresses() {
-		return addresses;
-	}
+    /**
+     * Set the gender of the patient.
+     *
+     * @param gender The patient's gender to set.
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
+    /**
+     * Get the addresses of the patient.
+     *
+     * @return A list of addresses associated with the patient.
+     */
+    public List<Address> getAddresses() {
+        return addresses;
+    }
 
-	public List<Telephone> getTelephoneNumbers() {
-		return telephoneNumbers;
-	}
+    /**
+     * Set the addresses of the patient.
+     *
+     * @param addresses A list of addresses to set for the patient.
+     */
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
-	public void setTelephoneNumbers(List<Telephone> telephoneNumbers) {
-		this.telephoneNumbers = telephoneNumbers;
-	}
+    /**
+     * Get the telephone numbers of the patient.
+     *
+     * @return A list of telephone numbers associated with the patient.
+     */
+    public List<Telephone> getTelephoneNumbers() {
+        return telephoneNumbers;
+    }
 
-	public Patient() {
+    /**
+     * Set the telephone numbers of the patient.
+     *
+     * @param telephoneNumbers A list of telephone numbers to set for the patient.
+     */
+    public void setTelephoneNumbers(List<Telephone> telephoneNumbers) {
+        this.telephoneNumbers = telephoneNumbers;
+    }
 
-	}
-
-	public Patient(Long id, @NotBlank(message = "Name is required") String name,
-			@NotBlank(message = "Date of Birth is required") String dateOfBirth,
-			@NotBlank(message = "Gender is required") String gender, List<Address> addresses,
-			@Pattern(regexp = "\\d{10}", message = "Invalid Telephone number") List<Telephone> telephoneNumbers) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.dateOfBirth = dateOfBirth;
-		this.gender = gender;
-		this.addresses = addresses;
-		this.telephoneNumbers = telephoneNumbers;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(addresses, dateOfBirth, gender, id, name, telephoneNumbers);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Patient other = (Patient) obj;
-		return Objects.equals(addresses, other.addresses) && Objects.equals(dateOfBirth, other.dateOfBirth)
-				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(telephoneNumbers, other.telephoneNumbers);
-	}
-
-	@Override
-	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender
-				+ ", addresses=" + addresses + ", telephoneNumbers=" + telephoneNumbers + "]";
-	}
-
-	// Constructors, getters, and setters
-
+    
 }

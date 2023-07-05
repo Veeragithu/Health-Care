@@ -1,56 +1,69 @@
 package com.cerner.HealthCare.Model;
 
-//import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-//import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Represents a telephone number.
+ */
 @Entity
 @Table(name = "telephone")
 public class Telephone {
-	@Id
-	@Column(name = "telephone_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
-	@Column(name = "number")
-	private Integer number;
-	/*
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "patient_id") private Patient patient;
-	 */
+    @Id
+    @Column(name = "telephone_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Telephone() {
+    @Column(name = "number")
+    private Integer number;
 
-	}
-	public Telephone(Long id, Integer number) {
-		super();
-		this.id = id;
-		this.number = number;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Integer getNumber() {
-		return number;
-	}
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
+    /**
+     * Default constructor for the Telephone class.
+     */
+    public Telephone() {
 
-	
+    }
+
+    /**
+     * Get the ID of the telephone number.
+     *
+     * @return The telephone number ID.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Set the ID of the telephone number.
+     *
+     * @param id The telephone number ID to set.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the number of the telephone number.
+     *
+     * @return The telephone number.
+     */
+    public Integer getNumber() {
+        return number;
+    }
+
+    /**
+     * Set the number of the telephone number.
+     *
+     * @param number The telephone number to set.
+     */
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+   
 }
